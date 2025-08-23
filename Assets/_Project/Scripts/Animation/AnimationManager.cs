@@ -1,8 +1,12 @@
 // Ivan Postarnak
 // https://github.com/IvanPostarnak/cup-heroes-clone
 
+using System;
+using CupHeroesClone.Common;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CupHeroesClone.Animation
 {
@@ -19,6 +23,12 @@ namespace CupHeroesClone.Animation
         
         [Header("Release")]
         [SerializeField] private float releaseDuration = 0.2f;
+        
+        [Header("Number Update")]
+        [SerializeField] private float numberUpdateDuration = 0.5f;
+        
+        [Header("Number Bar Update")]
+        [SerializeField] private float numberBarUpdateDuration = 0.5f;
         
         #endregion
         
@@ -49,6 +59,55 @@ namespace CupHeroesClone.Animation
             Vector3 growScale = Vector3.one;
             Tween tween = Grow(targetTransform, growScale, releaseDuration);
             tween.SetId(AnimationFlag.UI | AnimationFlag.Interactive);
+            tween.Play();
+        }
+
+        public void PlayNumberUpdate(
+            TextMeshProUGUI textElement,
+            float oldValue,
+            float newValue,
+            Action onComplete = null
+        )
+        {
+            Tween tween = DOTween.To(
+                () => oldValue,
+                value =>
+                {
+                    oldValue = value;
+                    textElement.text = Util.StringFromNumber(value);
+                },
+                newValue,
+                numberUpdateDuration
+            );
+            tween.SetId(AnimationFlag.UI | AnimationFlag.Text);
+            tween.OnComplete(() => onComplete?.Invoke());
+            tween.Play();
+        }
+        
+        public void PlayNumberBarUpdate(
+            TextMeshProUGUI tmp,
+            Image fillImage,
+            float startValue,
+            float endValue,
+            float minValue,
+            float maxValue,
+            Action onComplete = null
+        )
+        {
+            Tween tween = DOTween.To(
+                () => startValue, 
+                value => 
+                {
+                    startValue = value;
+                    tmp.text = Util.StringFromNumber(value);
+                    float normalizedValue = Util.Clamp01(value, minValue, maxValue);
+                    fillImage.fillAmount = normalizedValue;
+                }, 
+                endValue, 
+                numberBarUpdateDuration
+            );
+            tween.SetId(AnimationFlag.UI | AnimationFlag.Text);
+            tween.OnComplete(() => onComplete?.Invoke());
             tween.Play();
         }
         
