@@ -8,6 +8,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 333851184658716753, guid: 6165b3bbdd71170478e01037308e9817, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -94.223
+      objectReference: {fileID: 0}
+    - target: {fileID: 333851184658716753, guid: 6165b3bbdd71170478e01037308e9817, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -425.3592
+      objectReference: {fileID: 0}
+    - target: {fileID: 333851184658716753, guid: 6165b3bbdd71170478e01037308e9817, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000015258789
+      objectReference: {fileID: 0}
+    - target: {fileID: 333851184658716753, guid: 6165b3bbdd71170478e01037308e9817, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 179
+      objectReference: {fileID: 0}
     - target: {fileID: 807200254207957112, guid: 6165b3bbdd71170478e01037308e9817, type: 3}
       propertyPath: m_Name
       value: UpgradeCard_AttackDamage
@@ -15,7 +31,7 @@ PrefabInstance:
     - target: {fileID: 3552846401328908050, guid: 6165b3bbdd71170478e01037308e9817, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 1655633435396357533, guid: 9385d8308bb0c9c428d3196449a1281f, type: 3}
+      objectReference: {fileID: 21300000, guid: 25c0b4c702c734cd5a814929bde71469, type: 3}
     - target: {fileID: 4046667006834020630, guid: 6165b3bbdd71170478e01037308e9817, type: 3}
       propertyPath: upgradeTarget
       value: 1

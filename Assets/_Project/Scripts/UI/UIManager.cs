@@ -37,6 +37,8 @@ namespace CupHeroesClone.UI
         [SerializeField] private GameObject damageTextPrefab;
         [SerializeField] private GameObject healthBarOverlay;
         [SerializeField] private GameObject healthBarPrefab;
+        [Space]
+        [SerializeField] private GameObject backgroundOverlay;
 
         private ObjectPool _healthBarPool;
         private ObjectPool _damageTextPool;
@@ -61,6 +63,7 @@ namespace CupHeroesClone.UI
             CreateDamageTextPool();
             CreateHealthBarPool();
             CreateScreens();
+            backgroundOverlay.SetActive(false);
         }
 
         public GameObject GetHealthBarObject()
@@ -92,10 +95,12 @@ namespace CupHeroesClone.UI
 
         public void ShowRewardScreen()
         {
+            backgroundOverlay.SetActive(true);
             _rewardOverlay.gameObject.SetActive(true);
             _rewardOverlay.Init();
             _rewardOverlay.OnRewardComplete.AddListener(() =>
             {
+                backgroundOverlay.SetActive(false);
                 _rewardOverlay.gameObject.SetActive(false);
                 _rewardOverlay.Clear();
                 GameManager.Instance.StartNextWave();
@@ -104,10 +109,12 @@ namespace CupHeroesClone.UI
 
         public void ShowGameOver(int waveSurvived)
         {
+            backgroundOverlay.SetActive(true);
             _gameOverScreen.gameObject.SetActive(true);
             _gameOverScreen.Init(waveSurvived);
             _gameOverScreen.OnRestartGame.AddListener(() =>
             {
+                backgroundOverlay.SetActive(false);
                 _gameOverScreen.Clear();
                 _gameOverScreen.gameObject.SetActive(false);
                 _rewardOverlay.Clear();
@@ -201,6 +208,7 @@ namespace CupHeroesClone.UI
             _hudOverlay.Init();
             _hudOverlay.OnGamePause.AddListener(() =>
             {
+                backgroundOverlay.SetActive(true);
                 _pauseOverlay.gameObject.SetActive(true);
                 GameManager.Instance.SetGamePause(true);
             });
@@ -211,6 +219,7 @@ namespace CupHeroesClone.UI
             _pauseOverlay.Init();
             _pauseOverlay.OnGameContinue.AddListener(() =>
             {
+                backgroundOverlay.SetActive(false);
                 _pauseOverlay.gameObject.SetActive(false);
                 GameManager.Instance.SetGamePause(false);
             });

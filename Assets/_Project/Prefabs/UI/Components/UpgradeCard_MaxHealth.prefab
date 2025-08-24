@@ -8,6 +8,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 333851184658716753, guid: 6165b3bbdd71170478e01037308e9817, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -97.2838
+      objectReference: {fileID: 0}
+    - target: {fileID: 333851184658716753, guid: 6165b3bbdd71170478e01037308e9817, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 807200254207957112, guid: 6165b3bbdd71170478e01037308e9817, type: 3}
       propertyPath: m_Name
       value: UpgradeCard_MaxHealth
@@ -15,7 +23,7 @@ PrefabInstance:
     - target: {fileID: 3552846401328908050, guid: 6165b3bbdd71170478e01037308e9817, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 6591160121764855195, guid: e58e2b272f91af149a942b8ec60f20ef, type: 3}
+      objectReference: {fileID: 21300000, guid: a15beef3e99cc42118d9a86018e0767e, type: 3}
     - target: {fileID: 6280920684357784264, guid: 6165b3bbdd71170478e01037308e9817, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
