@@ -1,0 +1,25 @@
+// Ivan Postarnak
+// https://github.com/IvanPostarnak/cup-heroes-clone
+
+using UnityEngine;
+
+namespace CupHeroesClone.UI.Basic
+{
+    [DisallowMultipleComponent]
+    public class CustomButton : Interactive
+    {
+        // possible notification badge implementation
+
+        public virtual void Activate()
+        {
+            isInteractionEnabled = true;
+        }
+        
+        public virtual void Deactivate()
+        {
+            isInteractionEnabled = false;
+        }
+        
+        
+    }
+}
