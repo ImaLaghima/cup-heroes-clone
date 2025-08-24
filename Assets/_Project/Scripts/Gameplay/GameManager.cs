@@ -55,6 +55,7 @@ namespace CupHeroesClone.Gameplay
 
         public void StartNewGame()
         {
+            AudioManager.Instance.PlayNextMelody();
             StartNextWave();
         }
 
@@ -82,6 +83,7 @@ namespace CupHeroesClone.Gameplay
         
         public void CountPlayerDeath()
         {
+            AudioManager.Instance.PlayGameOver();
             GameOver();
         }
 
