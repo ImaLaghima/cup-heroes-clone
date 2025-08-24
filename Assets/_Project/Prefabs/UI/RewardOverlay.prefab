@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1226353686145746574, guid: b3c9c213b79575747a96681c62be867a, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 700.8812
+      value: 585.9995
       objectReference: {fileID: 0}
     - target: {fileID: 1226353686145746574, guid: b3c9c213b79575747a96681c62be867a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -246,7 +246,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1226353686145746574, guid: b3c9c213b79575747a96681c62be867a, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 395.50732
+      value: 492
       objectReference: {fileID: 0}
     - target: {fileID: 1226353686145746574, guid: b3c9c213b79575747a96681c62be867a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -383,7 +383,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2402058933399259950, guid: c9feef853e8942d4a8261dbd725f43d8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 340
+      value: 332
       objectReference: {fileID: 0}
     - target: {fileID: 2402058933399259950, guid: c9feef853e8942d4a8261dbd725f43d8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -510,7 +510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2111601244956476876, guid: 8b1abe9f2aeca9542bd375e59ca1e9b6, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -336
+      value: -344
       objectReference: {fileID: 0}
     - target: {fileID: 2111601244956476876, guid: 8b1abe9f2aeca9542bd375e59ca1e9b6, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -673,7 +673,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8710967648241346883, guid: bf59c943ce4c2ba42b4f7390e8d3def9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000030517
+      value: -7.9999695
       objectReference: {fileID: 0}
     - target: {fileID: 8710967648241346883, guid: bf59c943ce4c2ba42b4f7390e8d3def9, type: 3}
       propertyPath: m_AnchoredPosition.y
