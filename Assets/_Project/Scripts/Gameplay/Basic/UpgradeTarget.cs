@@ -5,7 +5,7 @@ namespace CupHeroesClone.Gameplay.Basic
 {
     public enum UpgradeTarget : byte
     {
-        Health,
+        MaxHealth,
         AttackDamage,
         AttackSpeed,
     }

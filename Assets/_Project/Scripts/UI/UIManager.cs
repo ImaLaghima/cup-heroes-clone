@@ -2,6 +2,7 @@
 // https://github.com/IvanPostarnak/cup-heroes-clone
 
 using CupHeroesClone.Common.Pool;
+using CupHeroesClone.Gameplay;
 using CupHeroesClone.UI.Components;
 using UnityEngine;
 
@@ -14,11 +15,25 @@ namespace CupHeroesClone.UI
         
         #region Fields
         
-        [Header("Damage Overlay")]
+        [Header("Screens")]
+        [SerializeField] private GameObject screensParent;
+        [SerializeField] private GameObject overlaysParent;
+        [Space]
+        [SerializeField] private GameObject homeScreenPrefab;
+        [SerializeField] private GameObject hudOverlayPrefab;
+        [SerializeField] private GameObject rewardOverlayPrefab;
+        [SerializeField] private GameObject pauseOverlayPrefab;
+        [SerializeField] private GameObject gameOverScreenPrefab;
+        
+        private HomeScreen _homeScreen;
+        private HudOverlay _hudOverlay;
+        private RewardOverlay _rewardOverlay;
+        private PauseOverlay _pauseOverlay;
+        private GameOverScreen _gameOverScreen;
+        
+        [Header("Gameplay Overlays")]
         [SerializeField] private GameObject damageOverlay;
         [SerializeField] private GameObject damageTextPrefab;
-        
-        [Header("HealthBar Overlay")]
         [SerializeField] private GameObject healthBarOverlay;
         [SerializeField] private GameObject healthBarPrefab;
 
@@ -44,6 +59,7 @@ namespace CupHeroesClone.UI
         {
             CreateDamageTextPool();
             CreateHealtBarPool();
+            CreateScreens();
         }
 
         public GameObject GetHealthBarObject()
@@ -101,6 +117,74 @@ namespace CupHeroesClone.UI
             go.transform.SetParent(healthBarOverlay.transform, false);
             _healthBarPool = go.AddComponent<ObjectPool>();
             _healthBarPool.Init(healthBarPrefab);
+        }
+
+        private void CreateScreens()
+        {
+            _homeScreen = Instantiate(
+                homeScreenPrefab,
+                screensParent.transform
+            ).GetComponent<HomeScreen>();
+            SetupHomeScreen();
+            
+            _hudOverlay = Instantiate(
+                hudOverlayPrefab,
+                overlaysParent.transform
+            ).GetComponent<HudOverlay>();
+            _hudOverlay.gameObject.SetActive(false);
+            SetupHudOverlay();
+            
+            _rewardOverlay = Instantiate(
+                rewardOverlayPrefab,
+                overlaysParent.transform
+            ).GetComponent<RewardOverlay>();
+            _rewardOverlay.gameObject.SetActive(false);
+            
+            _pauseOverlay = Instantiate(
+                pauseOverlayPrefab,
+                overlaysParent.transform
+            ).GetComponent<PauseOverlay>();
+            _pauseOverlay.gameObject.SetActive(false);
+            SetupPauseOverlay();
+            
+            _gameOverScreen = Instantiate(
+                gameOverScreenPrefab,
+                screensParent.transform
+            ).GetComponent<GameOverScreen>();
+            _gameOverScreen.gameObject.SetActive(false);
+        }
+
+        private void SetupHomeScreen()
+        {
+            _homeScreen.Init();
+            _homeScreen.OnGameStart.AddListener(() =>
+            {
+                GameManager.Instance.StartNewGame();
+                _homeScreen.gameObject.SetActive(false);
+                
+                _hudOverlay.gameObject.SetActive(true);
+                _hudOverlay.UpdateNumbers();
+            });
+        }
+
+        private void SetupHudOverlay()
+        {
+            _hudOverlay.Init();
+            _hudOverlay.OnGamePause.AddListener(() =>
+            {
+                _pauseOverlay.gameObject.SetActive(true);
+                GameManager.Instance.SetGamePause(true);
+            });
+        }
+        
+        private void SetupPauseOverlay()
+        {
+            _pauseOverlay.Init();
+            _pauseOverlay.OnGameContinue.AddListener(() =>
+            {
+                _pauseOverlay.gameObject.SetActive(false);
+                GameManager.Instance.SetGamePause(false);
+            });
         }
         
         #endregion

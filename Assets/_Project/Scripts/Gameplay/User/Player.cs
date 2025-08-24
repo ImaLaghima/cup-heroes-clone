@@ -38,6 +38,11 @@ namespace CupHeroesClone.Gameplay.User
             }
         }
         
+        public float MaxHealth => _hero.MaxHealth;
+        public float Health => _hero.Health;
+        public float AttackDamage => _hero.AttackDamage;
+        public float AttackSpeed => _hero.AttackSpeed;
+        
         #endregion
         
         

@@ -9,5 +9,10 @@ namespace CupHeroesClone.UI.Basic
     public class CustomButton : Interactive
     {
         // possible notification badge implementation
+
+        public virtual void Deactivate()
+        {
+            isInteractionEnabled = false;
+        }
     }
 }

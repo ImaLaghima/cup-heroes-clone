@@ -52,6 +52,11 @@ namespace CupHeroesClone.Gameplay.Basic
             }
         }
         
+        public float MaxHealth => maxHealth;
+        public float AttackDamage => attackDamage;
+
+        public float AttackSpeed => attackSpeed;
+        
         #endregion
         
         
@@ -80,7 +85,7 @@ namespace CupHeroesClone.Gameplay.Basic
         {
             switch (target)
             {
-                case UpgradeTarget.Health:
+                case UpgradeTarget.MaxHealth:
                     maxHealth += amount;
                     currentHealth += amount;
                     break;

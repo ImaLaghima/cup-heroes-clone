@@ -18,5 +18,15 @@ namespace CupHeroesClone.UI.Basic
         {
             //
         }
+        
+        public virtual void SetText(string text)
+        {
+            textElement.text = text;
+        }
+
+        public virtual void SetTextColor(Color color)
+        {
+            textElement.color = color;
+        }
     }
 }

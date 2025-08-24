@@ -1,6 +1,7 @@
 // Ivan Postarnak
 // https://github.com/IvanPostarnak/cup-heroes-clone
 
+using CupHeroesClone.Gameplay.User;
 using CupHeroesClone.UI.Basic;
 using CupHeroesClone.UI.Components;
 using UnityEngine;
@@ -16,29 +17,84 @@ namespace CupHeroesClone.UI
         [SerializeField] private PauseButton pauseButton;
         [SerializeField] private BalancePanel balancePanel;
         
+        
         [Header("Hero Stats")]
-        [SerializeField] private ResourcePanel healthPanel;
-        [SerializeField] private ResourcePanel attackDamage;
-        [SerializeField] private ResourcePanel attackSpeed;
+        [SerializeField] private ResourcePanel maxHealthPanel;
+        [SerializeField] private ResourcePanel attackDamagePanel;
+        [SerializeField] private ResourcePanel attackSpeedPanel;
         
         #endregion
         
         
+        #region Events
+        
         public readonly UnityEvent OnGamePause = new UnityEvent();
+        
+        #endregion
 
-        private void OnEnable()
+        
+        #region MonoBehavior
+        
+        //
+        
+        #endregion
+        
+        
+        #region Public Methods
+
+        public void Init()
         {
+            pauseButton?.Init();
             pauseButton?.onGamePause.AddListener(HandlePauseClick);
+            
+            Player.Instance.OnBalanceChange.AddListener(HandlePlayerBalanceChange);
         }
 
-        private void OnDisable()
+        public void Clear()
         {
-            pauseButton?.onGamePause.RemoveListener(HandlePauseClick);
+            pauseButton?.onGamePause.RemoveAllListeners();
+            
+            Player.Instance.OnBalanceChange.RemoveListener(HandlePlayerBalanceChange);
         }
+
+        public void UpdateNumbers()
+        {
+            balancePanel.UpdateNumber(Player.Instance.MoneyBalance);
+            maxHealthPanel.UpdateNumber(Player.Instance.MaxHealth);
+            attackDamagePanel.UpdateNumber(Player.Instance.AttackDamage);
+            attackSpeedPanel.UpdateNumber(Player.Instance.AttackSpeed);
+        }
+        
+        #endregion
+        
+        
+        #region Private Methods
 
         private void HandlePauseClick()
         {
             OnGamePause.Invoke();
         }
+
+        private void HandlePlayerBalanceChange(float newBalance)
+        {
+            balancePanel.UpdateNumber(newBalance);
+        }
+        
+        private void HandlePlayerMaxHealthChange(float newMaxBalance)
+        {
+            maxHealthPanel.UpdateNumber(newMaxBalance);
+        }
+        
+        private void HandlePlayerAttackDamageChange(float newAttackDamage)
+        {
+            attackDamagePanel.UpdateNumber(newAttackDamage);
+        }
+        
+        private void HandlePlayerAttackSpeedChange(float newAttackSpeed)
+        {
+            attackSpeedPanel.UpdateNumber(newAttackSpeed);
+        }
+        
+        #endregion
     }
 }

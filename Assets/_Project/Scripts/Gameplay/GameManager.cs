@@ -47,6 +47,20 @@ namespace CupHeroesClone.Gameplay
         
         #region Public Methods
 
+        public void StartNewGame()
+        {
+            // run
+            StartCombat();
+        }
+        
+        public void SetGamePause(bool value)
+        {
+            if (value)
+                Time.timeScale = 0;
+            else
+                Time.timeScale = 1;
+        }
+
         public void CountEnemyDeath()
         {
             Player.Instance.AddMoney(moneyPerKill);
@@ -65,8 +79,7 @@ namespace CupHeroesClone.Gameplay
         
         
         #region Private Methods
-
-        [ContextMenu("StartCombat()")]
+        
         private void StartCombat()
         {
             _enemiesKillCounter = 0;

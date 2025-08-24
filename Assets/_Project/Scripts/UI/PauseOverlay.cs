@@ -15,20 +15,30 @@ namespace CupHeroesClone.UI
         [SerializeField] private TextMeshProUGUI textComponent;
 
         public readonly UnityEvent OnGameContinue = new UnityEvent();
+        
+        
+        #region Public Methods
 
-        private void OnEnable()
+        public void Init()
         {
             buttonComponent?.onClick.AddListener(HandleContinueClick);
         }
-        
-        private void OnDisable()
+
+        public void Clear()
         {
-            buttonComponent?.onClick.RemoveListener(HandleContinueClick);
+            buttonComponent?.onClick.RemoveAllListeners();
         }
+        
+        #endregion
+        
+        
+        #region Private Methods
 
         private void HandleContinueClick()
         {
             OnGameContinue.Invoke();
         }
+        
+        #endregion
     }
 }

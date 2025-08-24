@@ -15,21 +15,37 @@ namespace CupHeroesClone.UI
         public readonly UnityEvent OnGameStart = new UnityEvent();
 
 
-        private void OnEnable()
+        #region MonoBehavior
+        
+        //
+        
+        #endregion
+        
+        
+        #region Public Methods
+
+        public void Init()
         {
+            startGameButton?.Init();
             startGameButton?.onGameStart.AddListener(HandleStartGameClick);
         }
 
-        private void OnDisable()
+        public void Clear()
         {
-            startGameButton?.onGameStart.RemoveListener(HandleStartGameClick);
+            startGameButton?.onGameStart.RemoveAllListeners();
         }
         
+        #endregion
+        
 
+        #region Private Methods
+        
         private void HandleStartGameClick()
         {
             OnGameStart.Invoke();
         }
+        
+        #endregion
     }
 }
 
