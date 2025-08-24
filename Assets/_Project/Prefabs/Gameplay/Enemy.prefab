@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &191547912042909520
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3978546399286134580}
+  m_Layer: 16
+  m_Name: DamageTextOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3978546399286134580
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191547912042909520}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.16, y: 1.3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 571912171169194864}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &338014578713369136
 GameObject:
   m_ObjectHideFlags: 0
@@ -34,6 +65,7 @@ Transform:
   - {fileID: 1163524907978945673}
   - {fileID: 5346653983156000651}
   - {fileID: 5796705706637146675}
+  - {fileID: 3978546399286134580}
   m_Father: {fileID: 5671149811408439377}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8035015237068079251
@@ -165,7 +197,7 @@ Transform:
   m_GameObject: {fileID: 1795413941645808417}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 4.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -218,13 +250,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CupHeroesClone.Gameplay.Enemy.Enemy
   minHealth: 0
-  maxHealth: 100
-  currentHealth: 100
+  maxHealth: 24
+  currentHealth: 24
   attackDamage: 10
-  attackSpeed: 2
+  attackSpeed: 1
   healthBarOrigin: {fileID: 1795413941645808417}
   projectileTargetOrigin: {fileID: 9134078366771551595}
-  rigidbody2D: {fileID: 4973805807627806922}
+  damageTextSpawnOrigin: {fileID: 191547912042909520}
+  rigidbodyComponent: {fileID: 4973805807627806922}
   bodyCollider: {fileID: 1397661436650030100}
   attackCollider: {fileID: 7872481870952444057}
   moveVelocity: 1.5

@@ -31,6 +31,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 7237210049891091033}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2236232996472064681
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6011972818703614872}
+  m_Layer: 16
+  m_Name: DamageTextOrigin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6011972818703614872
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2236232996472064681}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.07, y: 2.26, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7237210049891091033}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2506426688715029920
 GameObject:
   m_ObjectHideFlags: 0
@@ -66,6 +97,7 @@ Transform:
   - {fileID: 2474741009048110522}
   - {fileID: 5564846625007347686}
   - {fileID: 3494720135096251306}
+  - {fileID: 6011972818703614872}
   m_Father: {fileID: 5797690166444806258}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5360872091723876306
@@ -197,7 +229,7 @@ Transform:
   m_GameObject: {fileID: 3159870637745196691}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9, y: 0, z: 0}
+  m_LocalPosition: {x: -1.63, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -306,7 +338,7 @@ Transform:
   m_GameObject: {fileID: 5873734629606506547}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 5.27, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -365,7 +397,8 @@ MonoBehaviour:
   attackSpeed: 2
   healthBarOrigin: {fileID: 5873734629606506547}
   projectileTargetOrigin: {fileID: 1391994781441971096}
-  rigidbody2D: {fileID: 8906288389820855515}
+  damageTextSpawnOrigin: {fileID: 2236232996472064681}
+  rigidbodyComponent: {fileID: 8906288389820855515}
   bodyCollider: {fileID: 3501109988869753661}
   attackCollider: {fileID: 3657581539743312749}
   projectilePrefab: {fileID: 6964500935676823945, guid: b9a0d8358a5505149b1dd0151fb967fb, type: 3}

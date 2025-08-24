@@ -14,14 +14,11 @@ namespace CupHeroesClone.Gameplay
         public static GameManager Instance { get; private set; }
         
         #region Fields
-
-        [Header("General")]
-        [SerializeField] private UIManager uiManager;
         
         [Header("Combat")]
         [SerializeField] private EnemyFactory enemyFactory;
         [SerializeField] private int firstWaveSize = 2;
-        [SerializeField] private int increaseEachWave = 2;
+        [SerializeField] private int increaseEachWaveBy = 2;
         [SerializeField] private int moneyPerKill = 2;
 
         private int _waveCounter = 0;
@@ -40,6 +37,7 @@ namespace CupHeroesClone.Gameplay
 
         private void Start()
         {
+            UIManager.Instance.Init();
             Player.Instance.Init();
             enemyFactory.Init();
         }
@@ -72,7 +70,7 @@ namespace CupHeroesClone.Gameplay
         private void StartCombat()
         {
             _enemiesKillCounter = 0;
-            _waveSize = firstWaveSize + _waveCounter * increaseEachWave;
+            _waveSize = firstWaveSize + _waveCounter * increaseEachWaveBy;
             _waveCounter++;
             
 #if UNITY_EDITOR

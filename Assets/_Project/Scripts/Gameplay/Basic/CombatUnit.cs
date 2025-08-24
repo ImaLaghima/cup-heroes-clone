@@ -2,6 +2,8 @@
 // https://github.com/IvanPostarnak/cup-heroes-clone
 
 using CupHeroesClone.Common;
+using CupHeroesClone.UI;
+using CupHeroesClone.UI.Components;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -22,10 +24,14 @@ namespace CupHeroesClone.Gameplay.Basic
         [Space]
         [SerializeField] protected GameObject healthBarOrigin;
         [SerializeField] protected GameObject projectileTargetOrigin;
+        [SerializeField] protected GameObject damageTextSpawnOrigin;
         [Space]
-        [SerializeField] protected Rigidbody2D rigidbody2D;
+        [SerializeField] protected Rigidbody2D rigidbodyComponent;
         [SerializeField] protected Collider2D bodyCollider;
         [SerializeField] protected Collider2D attackCollider;
+        
+        protected GameObject healthBarObj;
+        protected HealthBar healthBar;
 
         #endregion
         
@@ -42,7 +48,7 @@ namespace CupHeroesClone.Gameplay.Basic
                 currentHealth = Util.Clamp(value, minHealth, maxHealth);
                 OnHealthChange.Invoke(currentHealth);
                 if (currentHealth <= 0)
-                    OnUnitDeath.Invoke();
+                    HandleDeath();
             }
         }
         
@@ -58,6 +64,17 @@ namespace CupHeroesClone.Gameplay.Basic
         
         
         #region Public Methods
+
+        public virtual void Init()
+        {
+            healthBarObj = UIManager.Instance.GetHealthBarObject();
+            healthBar = healthBarObj.GetComponent<HealthBar>();
+            
+            healthBar?.Init(minHealth, maxHealth);
+            healthBar?.UpdatePosition(healthBarOrigin.transform.position);
+            healthBarObj.SetActive(true);
+            healthBar?.UpdateNumber(currentHealth);
+        }
 
         public void Upgrade(UpgradeTarget target, float amount)
         {
@@ -95,7 +112,16 @@ namespace CupHeroesClone.Gameplay.Basic
         private void TakeDamage(float amount)
         {
             Health -= amount;
-            // change health bar somehow
+            healthBar?.UpdateNumber(Health);
+            UIManager.Instance.ShowDamage(amount, damageTextSpawnOrigin.transform.position);
+        }
+
+        private void HandleDeath()
+        {
+            UIManager.Instance.ReturnHealthBarObject(healthBarObj);
+            healthBarObj = null;
+            healthBar = null;
+            OnUnitDeath.Invoke();
         }
         
         #endregion

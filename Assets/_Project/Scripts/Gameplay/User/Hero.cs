@@ -28,8 +28,9 @@ namespace CupHeroesClone.Gameplay.User
         
         #region Public Methods
 
-        public void Init()
+        public override void Init()
         {
+            base.Init();
             _state = HeroState.Idle;
             CreateProjectilePool();
         }
@@ -82,7 +83,7 @@ namespace CupHeroesClone.Gameplay.User
         {
             while (_state == HeroState.Fight)
             {
-                while (_targetsOfAttack.Count == 0)
+                while (_targetsOfAttack.Count == 0 && !_currentTarget)
                     yield return null;
 
                 if (_currentTarget == null)

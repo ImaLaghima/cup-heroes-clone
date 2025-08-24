@@ -29,6 +29,14 @@ namespace CupHeroesClone.Animation
         
         [Header("Number Bar Update")]
         [SerializeField] private float numberBarUpdateDuration = 0.5f;
+
+        [Header("Melee Attack")] 
+        [SerializeField] private float lungeDistance = 0.5f;
+        [SerializeField] private float lungeDuration = 0.2f;
+        
+        [Header("DamageText")]
+        [SerializeField] private float pingScaleMultiplier = 2f;
+        [SerializeField] private float pingDuration = 0.2f;
         
         #endregion
         
@@ -114,6 +122,51 @@ namespace CupHeroesClone.Animation
         #endregion
         
         
+        #region Gameplay API
+
+        public void PlayMeleeLunge(Transform targetTransform, Action onComplete = null)
+        {
+            Vector3 originalPosition = targetTransform.position;
+            Vector3 lungePosition = originalPosition + targetTransform.right * -lungeDistance;
+            
+            // Debug.Log("original = " + originalPosition);
+            // Debug.Log("lunge = " + lungePosition);
+            
+            // TODO: wif lunge animation
+            
+            Sequence lungeSequence = DOTween.Sequence();
+            lungeSequence
+                .Append(targetTransform.DOMove(lungePosition, lungeDuration / 2)
+                    .SetEase(Ease.OutQuad)
+                )
+                .Append(targetTransform.DOMove(originalPosition, lungeDuration / 2)
+                    .SetEase(Ease.InQuad)
+                );
+
+            lungeSequence.SetId(AnimationFlag.Gameplay | AnimationFlag.Attack | AnimationFlag.Enemy);
+            lungeSequence.OnComplete(() => onComplete?.Invoke());
+            lungeSequence.Play();
+        }
+
+        public void PlayDamageText(Transform targetTransform, Action onComplete = null)
+        {
+            Vector3 maxPingScale = targetTransform.localScale * pingScaleMultiplier;
+            Vector3 originalScale = targetTransform.localScale;
+            
+            Tween tween = Grow(targetTransform, maxPingScale, pingDuration);
+            tween.SetId(AnimationFlag.UI | AnimationFlag.Text);
+            tween.OnComplete(() =>
+            {
+                targetTransform.localScale = originalScale;
+                onComplete?.Invoke();
+            });
+            
+            tween.Play();
+        }
+        
+        #endregion
+        
+        
         #region Basic Animations
 
         private Tween Shrink(Transform targetTransform, Vector3 shrinkScale, float shrinkDuration)
@@ -125,6 +178,12 @@ namespace CupHeroesClone.Animation
         private Tween Grow(Transform targetTransform, Vector3 growScale, float growDuration)
         {
             Tween tween = targetTransform.DOScale(growScale, growDuration);
+            return tween;
+        }
+        
+        private Tween Slide(Transform targetTransform, Vector3 slidePosition, float slideDuration)
+        {
+            Tween tween = targetTransform.DOMove(slidePosition, slideDuration);
             return tween;
         }
         

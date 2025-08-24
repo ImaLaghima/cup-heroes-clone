@@ -1,6 +1,8 @@
 // Ivan Postarnak
 // https://github.com/IvanPostarnak/cup-heroes-clone
 
+using UnityEngine;
+
 namespace CupHeroesClone.Common
 {
     public class Util
@@ -24,6 +26,15 @@ namespace CupHeroesClone.Common
             return number
                 .ToString("#,0", System.Globalization.CultureInfo.InvariantCulture)
                 .Replace(',', ' ');
+        }
+
+        public static Vector2 WorldToScreenPosition(Vector3 worldPosition)
+        {
+            var screenPos = Camera.main 
+                ? Camera.main.WorldToScreenPoint(worldPosition)
+                : Vector3.zero;
+            
+            return screenPos;
         }
     }
 }

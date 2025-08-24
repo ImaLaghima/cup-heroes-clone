@@ -2,6 +2,7 @@
 // https://github.com/IvanPostarnak/cup-heroes-clone
 
 using System.Collections;
+using CupHeroesClone.Animation;
 using CupHeroesClone.Common;
 using CupHeroesClone.Gameplay.Basic;
 using UnityEngine;
@@ -40,10 +41,9 @@ namespace CupHeroesClone.Gameplay.Enemy
             StartMoving();
         }
 
-        private void FixedUpdate()
+        private void LateUpdate()
         {
-            
-                
+            healthBar?.UpdatePosition(healthBarOrigin.transform.position);
         }
         
         private void OnDisable()
@@ -58,6 +58,7 @@ namespace CupHeroesClone.Gameplay.Enemy
 
         public void ActivateAt(Transform placeTransform)
         {
+            base.Init();
             transform.position = placeTransform.position;
             gameObject.SetActive(true);
         }
@@ -69,13 +70,13 @@ namespace CupHeroesClone.Gameplay.Enemy
 
         private void StartMoving()
         {
-            rigidbody2D.linearVelocity = _effectiveMoveDirection * moveVelocity;
+            rigidbodyComponent.linearVelocity = _effectiveMoveDirection * moveVelocity;
         }
 
         private void StartFighting()
         {
             State = EnemyState.Fight;
-            rigidbody2D.linearVelocity = Vector2.zero;
+            rigidbodyComponent.linearVelocity = Vector2.zero;
             StartCoroutine(Fighting());
         }
 
@@ -99,7 +100,10 @@ namespace CupHeroesClone.Gameplay.Enemy
         {
             while (true)
             {
-                _targetOfAttack.ReceiveDamage(attackDamage);
+                AnimationManager.Instance.PlayMeleeLunge(transform,() =>
+                {
+                    _targetOfAttack.ReceiveDamage(attackDamage);
+                });
                 yield return new WaitForSeconds(1f / attackSpeed);
             }
         }
