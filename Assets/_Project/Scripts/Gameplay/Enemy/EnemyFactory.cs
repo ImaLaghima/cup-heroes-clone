@@ -24,6 +24,8 @@ namespace CupHeroesClone.Gameplay.Enemy
         private List<Enemy> spawnedEnemies = new List<Enemy>();
         private ObjectPool _enemyPool;
 
+        private int _indexOfLastSpawner;
+
         #endregion
         
         
@@ -75,7 +77,12 @@ namespace CupHeroesClone.Gameplay.Enemy
 
         private GameObject GeNextSpawnPoint()
         {
-            return spawnPoints[Random.Range(0, spawnPoints.Count)];
+            int nextIndex = Random.Range(0, spawnPoints.Count);
+            while (nextIndex == _indexOfLastSpawner)
+                nextIndex = Random.Range(0, spawnPoints.Count);
+            
+            _indexOfLastSpawner = nextIndex;
+            return spawnPoints[nextIndex];
         }
 
         private void TakeEnemyBack(Enemy enemy)
