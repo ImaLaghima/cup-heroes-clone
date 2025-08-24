@@ -1,6 +1,7 @@
 // Ivan Postarnak
 // https://github.com/IvanPostarnak/cup-heroes-clone
 
+using CupHeroesClone.Gameplay.Basic;
 using CupHeroesClone.Gameplay.User;
 using CupHeroesClone.Gameplay.Enemy;
 using CupHeroesClone.UI;
@@ -22,7 +23,7 @@ namespace CupHeroesClone.Gameplay
         [SerializeField] private int moneyPerKill = 2;
 
         private int _waveCounter = 0;
-        private int _waveSize;
+        private int _enemiesInWave = 0;
         private int _enemiesKillCounter = 0;
         
         #endregion
@@ -49,6 +50,11 @@ namespace CupHeroesClone.Gameplay
 
         public void StartNewGame()
         {
+            StartNextWave();
+        }
+
+        public void StartNextWave()
+        {
             // run
             StartCombat();
         }
@@ -66,13 +72,19 @@ namespace CupHeroesClone.Gameplay
             Player.Instance.AddMoney(moneyPerKill);
             _enemiesKillCounter += 1;
 
-            if (_enemiesKillCounter >= _waveSize)
+            if (_enemiesKillCounter >= _enemiesInWave)
                 RewardPlayer();
         }
         
         public void CountPlayerDeath()
         {
             GameOver();
+        }
+
+        public void PurchaseUpgrade(UpgradeTarget upgradeTarget, float value, float cost)
+        {
+            Player.Instance.UpgradeHero(upgradeTarget, value);
+            Player.Instance.TryWithdrawMoney(cost);
         }
         
         #endregion
@@ -83,26 +95,31 @@ namespace CupHeroesClone.Gameplay
         private void StartCombat()
         {
             _enemiesKillCounter = 0;
-            _waveSize = firstWaveSize + _waveCounter * increaseEachWaveBy;
+            _enemiesInWave = firstWaveSize + _waveCounter * increaseEachWaveBy;
             _waveCounter++;
             
-#if UNITY_EDITOR
-            Debug.Log($"Wave {_waveCounter}: {_waveSize} enemies");
-#endif
+            Debug.Log($"Wave {_waveCounter}: {_enemiesInWave} enemies");
             
-            enemyFactory.SpawnEnemies(_waveSize);
+            enemyFactory.SpawnEnemies(_enemiesInWave);
             Player.Instance.StartCombat();
         }
 
         private void RewardPlayer()
         {
             Player.Instance.StopCombat();
-            // open overlay
+            UIManager.Instance.ShowRewardScreen();
+            // TODO: GameManager has to pass parameters, in order
+            // to configure reward options, not random bs
         }
 
         private void GameOver()
         {
-            // open overlay
+            Player.Instance.StopCombat();
+            enemyFactory.WithdrawEnemies();
+            UIManager.Instance.ShowGameOver(_waveCounter - 1);
+            _waveCounter = 0;
+            _enemiesInWave = 0;
+            _enemiesKillCounter = 0;
         }
         
         private void EnsureSingleton()

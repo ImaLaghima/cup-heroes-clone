@@ -14,10 +14,11 @@ namespace CupHeroesClone.Gameplay.Basic
         [SerializeField] private float speed = 12f;
         [SerializeField] private float arcHeightRatio = 0.2f;
         [SerializeField] private float hitRadius = 0.2f;
+        [SerializeField] private float fallbackLifetime = 1f;
         
         private Vector3 _endPosition;
         private bool _isActive;
-        
+        private float _timeSinceStart;
         private GameObject _target;
         
         #endregion
@@ -26,6 +27,7 @@ namespace CupHeroesClone.Gameplay.Basic
         #region Events
         
         public readonly UnityEvent OnTargetReach = new UnityEvent();
+        public readonly UnityEvent OnProjectileEnd = new UnityEvent();
         
         #endregion
         
@@ -34,19 +36,22 @@ namespace CupHeroesClone.Gameplay.Basic
         
         private void FixedUpdate()
         {
-            if (!_isActive) return;
+            if (!_isActive)
+                EndProjectile();
 
-            Vector3 currentPosition = transform.position;
-            _endPosition = _target.transform.position;
+            _timeSinceStart += Time.fixedDeltaTime;
+            if (_timeSinceStart >= fallbackLifetime)
+                EndProjectile();
             
+            if (_target == null)
+                EndProjectile();
+            
+            _endPosition = _target.transform.position;
+            Vector3 currentPosition = transform.position;
             Vector2 toEnd2D = new Vector2(_endPosition.x - currentPosition.x, _endPosition.y - currentPosition.y);
             float planarDistance = toEnd2D.magnitude;
             if (planarDistance <= hitRadius)
-            {
-                _isActive = false;
-                OnTargetReach.Invoke();
-                return;
-            }
+                TargetReached();
 
             // TODO: fix trajectory, recalculates each time - doesnt look parabolic
             
@@ -80,6 +85,7 @@ namespace CupHeroesClone.Gameplay.Basic
         public void Clear()
         {
             OnTargetReach.RemoveAllListeners();
+            OnProjectileEnd.RemoveAllListeners();
             _target = null;
             _isActive = false;
         }
@@ -103,6 +109,18 @@ namespace CupHeroesClone.Gameplay.Basic
             return oneMinus * oneMinus * startPosition
                    + 2f * oneMinus * clamped * controlPoint
                    + clamped * clamped * endPosition;
+        }
+
+        private void EndProjectile()
+        {
+            _isActive = false;
+            OnProjectileEnd.Invoke();
+        }
+
+        private void TargetReached()
+        {
+            OnTargetReach.Invoke();
+            EndProjectile();
         }
 
         #endregion

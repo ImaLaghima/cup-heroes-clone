@@ -3,6 +3,7 @@
 
 using CupHeroesClone.Common.Pool;
 using CupHeroesClone.Gameplay;
+using CupHeroesClone.Gameplay.User;
 using CupHeroesClone.UI.Components;
 using UnityEngine;
 
@@ -58,7 +59,7 @@ namespace CupHeroesClone.UI
         public void Init()
         {
             CreateDamageTextPool();
-            CreateHealtBarPool();
+            CreateHealthBarPool();
             CreateScreens();
         }
 
@@ -69,6 +70,7 @@ namespace CupHeroesClone.UI
 
         public void ReturnHealthBarObject(GameObject healthBarObj)
         {
+            if (!healthBarObj) return;
             healthBarObj.SetActive(false);
             _healthBarPool.Return(healthBarObj);
         }
@@ -86,6 +88,32 @@ namespace CupHeroesClone.UI
             });
             
             damageText.Show();
+        }
+
+        public void ShowRewardScreen()
+        {
+            _rewardOverlay.gameObject.SetActive(true);
+            _rewardOverlay.Init();
+            _rewardOverlay.OnRewardComplete.AddListener(() =>
+            {
+                _rewardOverlay.gameObject.SetActive(false);
+                _rewardOverlay.Clear();
+                GameManager.Instance.StartNextWave();
+            });
+        }
+
+        public void ShowGameOver(int waveSurvived)
+        {
+            _gameOverScreen.gameObject.SetActive(true);
+            _gameOverScreen.Init(waveSurvived);
+            _gameOverScreen.OnRestartGame.AddListener(() =>
+            {
+                _gameOverScreen.Clear();
+                _gameOverScreen.gameObject.SetActive(false);
+                _rewardOverlay.gameObject.SetActive(false);
+                Player.Instance.Restart();
+                GameManager.Instance.StartNewGame();
+            });
         }
         
         #endregion
@@ -111,7 +139,7 @@ namespace CupHeroesClone.UI
             _damageTextPool.Init(damageTextPrefab);
         }
 
-        private void CreateHealtBarPool()
+        private void CreateHealthBarPool()
         {
             GameObject go = new GameObject("HealthBarPool");
             go.transform.SetParent(healthBarOverlay.transform, false);

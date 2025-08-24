@@ -205,7 +205,7 @@ namespace CupHeroesClone.Animation
         private void Init()
         {
             DOTween.Init(true, false, LogBehaviour.ErrorsOnly);
-            DOTween.SetTweensCapacity(10, 5);
+            DOTween.SetTweensCapacity(200, 50);
             DOTween.defaultAutoPlay = AutoPlay.None;
         }
         

@@ -440,9 +440,9 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1613486192}
   - {fileID: 1667621651}
   - {fileID: 690253796}
+  - {fileID: 1613486192}
   m_Father: {fileID: 1536652599}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -827,8 +827,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CupHeroesClone.Gameplay.GameManager
   enemyFactory: {fileID: 696763496}
-  firstWaveSize: 3
-  increaseEachWaveBy: 2
+  firstWaveSize: 2
+  increaseEachWaveBy: 1
   moneyPerKill: 2
 --- !u!4 &1639726794
 Transform:

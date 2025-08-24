@@ -135,6 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efc92e62cf464d509acb30feade610b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CupHeroesClone.Gameplay.Basic.Projectile
-  speed: 8
+  speed: 7
   arcHeightRatio: 0.2
   hitRadius: 0.2
+  fallbackLifetime: 1

@@ -19,6 +19,7 @@ namespace CupHeroesClone.Gameplay.User
         [SerializeField] private LayerMask attackTargetLayers;
         
         private ObjectPool _projectilePool;
+        private List<Projectile> _spawnedProjectiles = new List<Projectile>();
         private HeroState _state;
         private Queue<CombatUnit> _targetsOfAttack = new Queue<CombatUnit>();
         private CombatUnit _currentTarget = null;
@@ -30,21 +31,35 @@ namespace CupHeroesClone.Gameplay.User
 
         public override void Init()
         {
-            base.Init();
             _state = HeroState.Idle;
             CreateProjectilePool();
         }
 
+        public override void RestoreDefault()
+        {
+            MaxHealth = 100;
+            MinHealth = 0;
+            Health = MaxHealth;
+            AttackDamage = 10f;
+            AttackSpeed = 1f;
+        }
+
         public void StartCombat()
         {
+            SetupHealthBar();
+            
             _state = HeroState.Fight;
-            _targetsOfAttack.Clear();
             _currentTarget = null;
             StartCoroutine(Fighting());
         }
         
         public void StopCombat()
         {
+            StopCoroutine(Fighting());
+            WithdrawProjectiles();
+            _targetsOfAttack.Clear();
+            ReleaseHealthBar();
+            
             _state = HeroState.Idle;
         }
         
@@ -63,15 +78,27 @@ namespace CupHeroesClone.Gameplay.User
             GameObject go = new GameObject("ProjectilePool");
             go.transform.SetParent(transform, false);
             _projectilePool = go.AddComponent<ObjectPool>();
-            _projectilePool.Init(projectilePrefab);
+            _projectilePool.Init(projectilePrefab, initialPoolSize: 20);
         }
         
         private void OnTriggerEnter2D(Collider2D other)
         {
-            // Debug.Log("Hero collide with " + other.name + "; Tag = " + other.tag);
-
             if (Physics2D.IsTouching(attackCollider, other) && other.CompareTag("Enemy"))
                 _targetsOfAttack.Enqueue(other.GetComponentInParent<CombatUnit>());
+        }
+
+        private void WithdrawProjectiles()
+        {
+            foreach (Projectile projectile in _spawnedProjectiles)
+                TakeProjectileBack(projectile);
+            
+            _spawnedProjectiles.Clear();
+        }
+
+        private void TakeProjectileBack(Projectile projectile)
+        {
+            projectile.Clear();
+            _projectilePool.Return(projectile.gameObject);
         }
         
         #endregion
@@ -94,11 +121,16 @@ namespace CupHeroesClone.Gameplay.User
                 
                 GameObject projectileObj = _projectilePool.Borrow();
                 Projectile projectile = projectileObj.GetComponent<Projectile>();
+                _spawnedProjectiles.Add(projectile);
+                
                 projectile.OnTargetReach.AddListener(() =>
                 {
-                    _currentTarget.ReceiveDamage(attackDamage);
-                    projectile.Clear();
-                    _projectilePool.Return(projectileObj);
+                    _currentTarget?.ReceiveDamage(attackDamage);
+                });
+
+                projectile.OnProjectileEnd.AddListener(() =>
+                {
+                    TakeProjectileBack(projectile);
                 });
                 
                 projectile.ActivateAt(projectileSpawnPoint.transform, _currentTarget.ProjectileTargetOrigin);

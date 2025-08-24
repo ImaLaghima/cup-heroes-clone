@@ -22,7 +22,6 @@ namespace CupHeroesClone.UI.Components
         {
             base.HandleClick();
             onGameStart.Invoke();
-            Debug.Log("Game Start");
         }
     }
 }

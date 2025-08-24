@@ -21,6 +21,7 @@ namespace CupHeroesClone.Gameplay.Enemy
 
         private int _targetSpawnCount;
         private int _currentSpawnCount = 0;
+        private List<Enemy> spawnedEnemies = new List<Enemy>();
         private ObjectPool _enemyPool;
 
         #endregion
@@ -45,9 +46,18 @@ namespace CupHeroesClone.Gameplay.Enemy
 
         public void SpawnEnemies(int amount)
         {
+            spawnedEnemies.Clear();
             _targetSpawnCount = amount;
             _currentSpawnCount = 0;
             StartCoroutine(SpawnEnemies());
+        }
+
+        public void WithdrawEnemies()
+        {
+            foreach (Enemy enemy in spawnedEnemies)
+                TakeEnemyBack(enemy);
+            
+            spawnedEnemies.Clear();
         }
         
         #endregion
@@ -67,6 +77,12 @@ namespace CupHeroesClone.Gameplay.Enemy
         {
             return spawnPoints[Random.Range(0, spawnPoints.Count)];
         }
+
+        private void TakeEnemyBack(Enemy enemy)
+        {
+            enemy.Clear();
+            _enemyPool.Return(enemy.gameObject);
+        }
         
         #endregion
         
@@ -82,11 +98,12 @@ namespace CupHeroesClone.Gameplay.Enemy
                 GameObject spawnPoint = GeNextSpawnPoint();
                 GameObject enemyObj = _enemyPool.Borrow();
                 Enemy enemy = enemyObj.GetComponent<Enemy>();
+                spawnedEnemies.Add(enemy);
+                
                 enemy.OnUnitDeath.AddListener(() =>
                 {
                     GameManager.Instance.CountEnemyDeath();
-                    enemy.Clear();
-                    _enemyPool.Return(enemyObj);
+                    TakeEnemyBack(enemy);
                 });
                 
                 enemy.ActivateAt(spawnPoint.transform);

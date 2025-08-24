@@ -441,6 +441,22 @@ PrefabInstance:
       propertyPath: m_fontSize
       value: 89.5
       objectReference: {fileID: 0}
+    - target: {fileID: 4031180804331541662, guid: b3c9c213b79575747a96681c62be867a, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4031180804331541662, guid: b3c9c213b79575747a96681c62be867a, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4031180804331541662, guid: b3c9c213b79575747a96681c62be867a, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4031180804331541662, guid: b3c9c213b79575747a96681c62be867a, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4278190080
+      objectReference: {fileID: 0}
     - target: {fileID: 6642735277575891868, guid: b3c9c213b79575747a96681c62be867a, type: 3}
       propertyPath: m_Name
       value: CustomButton

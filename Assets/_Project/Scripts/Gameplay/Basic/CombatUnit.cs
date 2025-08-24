@@ -43,7 +43,7 @@ namespace CupHeroesClone.Gameplay.Basic
         public float Health
         {
             get => currentHealth;
-            private set
+            protected set
             {
                 currentHealth = Util.Clamp(value, minHealth, maxHealth);
                 OnHealthChange.Invoke(currentHealth);
@@ -51,11 +51,30 @@ namespace CupHeroesClone.Gameplay.Basic
                     HandleDeath();
             }
         }
-        
-        public float MaxHealth => maxHealth;
-        public float AttackDamage => attackDamage;
 
-        public float AttackSpeed => attackSpeed;
+        public float MaxHealth
+        {
+            get => maxHealth;
+            protected set => maxHealth = value;
+        }
+        
+        public float MinHealth
+        {
+            get => minHealth;
+            protected set => minHealth = value;
+        }
+
+        public float AttackDamage
+        {
+            get => attackDamage;
+            protected set => attackDamage = value;
+        }
+
+        public float AttackSpeed
+        {
+            get => attackSpeed;
+            protected set => attackSpeed = value;
+        }
         
         #endregion
         
@@ -72,13 +91,7 @@ namespace CupHeroesClone.Gameplay.Basic
 
         public virtual void Init()
         {
-            healthBarObj = UIManager.Instance.GetHealthBarObject();
-            healthBar = healthBarObj.GetComponent<HealthBar>();
-            
-            healthBar?.Init(minHealth, maxHealth);
-            healthBar?.UpdatePosition(healthBarOrigin.transform.position);
-            healthBarObj.SetActive(true);
-            healthBar?.UpdateNumber(currentHealth);
+            SetupHealthBar();
         }
 
         public void Upgrade(UpgradeTarget target, float amount)
@@ -87,7 +100,7 @@ namespace CupHeroesClone.Gameplay.Basic
             {
                 case UpgradeTarget.MaxHealth:
                     maxHealth += amount;
-                    currentHealth += amount;
+                    Health += amount;
                     break;
                 case UpgradeTarget.AttackDamage:
                     attackDamage += amount;
@@ -107,6 +120,39 @@ namespace CupHeroesClone.Gameplay.Basic
         {
             OnHealthChange.RemoveAllListeners();
             OnUnitDeath.RemoveAllListeners();
+            ReleaseHealthBar();
+            RestoreDefault();
+        }
+
+        public virtual void RestoreDefault()
+        {
+            Health = MaxHealth;
+        }
+        
+        #endregion
+        
+        
+        #region Protected Methods
+
+        protected virtual void SetupHealthBar()
+        {
+            healthBarObj = UIManager.Instance.GetHealthBarObject();
+            healthBar = healthBarObj.GetComponent<HealthBar>();
+            
+            healthBar?.Init(minHealth, maxHealth);
+            healthBar?.UpdatePosition(healthBarOrigin.transform.position);
+            healthBarObj.SetActive(true);
+            healthBar?.UpdateNumber(currentHealth);
+        }
+
+        protected virtual void ReleaseHealthBar()
+        {
+            if (healthBarObj)
+            {
+                UIManager.Instance.ReturnHealthBarObject(healthBarObj);
+                healthBarObj = null;
+                healthBar = null;
+            }
         }
         
         #endregion
@@ -123,9 +169,7 @@ namespace CupHeroesClone.Gameplay.Basic
 
         private void HandleDeath()
         {
-            UIManager.Instance.ReturnHealthBarObject(healthBarObj);
-            healthBarObj = null;
-            healthBar = null;
+            ReleaseHealthBar();
             OnUnitDeath.Invoke();
         }
         

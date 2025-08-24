@@ -48,6 +48,9 @@ namespace CupHeroesClone.UI
             pauseButton?.onGamePause.AddListener(HandlePauseClick);
             
             Player.Instance.OnBalanceChange.AddListener(HandlePlayerBalanceChange);
+            Player.Instance.OnMaxHealthChange.AddListener(HandlePlayerMaxHealthChange);
+            Player.Instance.OnAttackDamageChange.AddListener(HandlePlayerAttackDamageChange);
+            Player.Instance.OnAttackSpeedChange.AddListener(HandlePlayerAttackSpeedChange);
         }
 
         public void Clear()
@@ -55,6 +58,9 @@ namespace CupHeroesClone.UI
             pauseButton?.onGamePause.RemoveAllListeners();
             
             Player.Instance.OnBalanceChange.RemoveListener(HandlePlayerBalanceChange);
+            Player.Instance.OnMaxHealthChange.RemoveListener(HandlePlayerMaxHealthChange);
+            Player.Instance.OnAttackDamageChange.RemoveListener(HandlePlayerAttackDamageChange);
+            Player.Instance.OnAttackSpeedChange.RemoveListener(HandlePlayerAttackSpeedChange);
         }
 
         public void UpdateNumbers()

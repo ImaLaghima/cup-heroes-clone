@@ -49,6 +49,9 @@ namespace CupHeroesClone.Gameplay.User
         #region Events
         
         public readonly UnityEvent<float> OnBalanceChange = new UnityEvent<float>();
+        public readonly UnityEvent<float> OnMaxHealthChange = new UnityEvent<float>();
+        public readonly UnityEvent<float> OnAttackDamageChange = new UnityEvent<float>();
+        public readonly UnityEvent<float> OnAttackSpeedChange = new UnityEvent<float>();
         
         #endregion
         
@@ -77,6 +80,18 @@ namespace CupHeroesClone.Gameplay.User
             _hero.Init();
         }
 
+        public void Restart()
+        {
+            _hero.RestoreDefault();
+            MoneyBalance = 50;
+            
+            _hero.OnUnitDeath.AddListener(() =>
+            {
+                GameManager.Instance.CountPlayerDeath();
+                _hero.OnUnitDeath.RemoveAllListeners();
+            });
+        }
+
         public void StartCombat()
         {
             _hero.StartCombat();
@@ -97,22 +112,35 @@ namespace CupHeroesClone.Gameplay.User
             MoneyBalance += amount;
         }
         
-        public bool TryWithdrawMoney(float amount, out float actualBalance)
+        public bool TryWithdrawMoney(float amount)
         {
-            if (MoneyBalance - amount < moneyBalanceMin)
+            if (MoneyBalance - amount >= moneyBalanceMin)
             {
                 MoneyBalance -= amount;
-                actualBalance = MoneyBalance;
                 return true;
             }
             
-            actualBalance = MoneyBalance;
             return false;
         }
 
         public void UpgradeHero(UpgradeTarget target, float amount)
         {
             _hero.Upgrade(target, amount);
+
+            switch (target)
+            {
+                case UpgradeTarget.MaxHealth:
+                    OnMaxHealthChange.Invoke(MaxHealth);
+                    break;
+                
+                case UpgradeTarget.AttackDamage:
+                    OnAttackDamageChange.Invoke(AttackDamage);
+                    break;
+                
+                case UpgradeTarget.AttackSpeed:
+                    OnAttackSpeedChange.Invoke(AttackSpeed);
+                    break;
+            }
         }
         
         #endregion

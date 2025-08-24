@@ -260,7 +260,7 @@ MonoBehaviour:
   rigidbodyComponent: {fileID: 4973805807627806922}
   bodyCollider: {fileID: 1397661436650030100}
   attackCollider: {fileID: 7872481870952444057}
-  moveVelocity: 1.5
+  moveVelocity: 1
   moveDirection: 1
 --- !u!50 &4973805807627806922
 Rigidbody2D:

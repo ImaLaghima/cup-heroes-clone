@@ -1,6 +1,7 @@
 // Ivan Postarnak
 // https://github.com/IvanPostarnak/cup-heroes-clone
 
+using CupHeroesClone.Common;
 using CupHeroesClone.Gameplay.Basic;
 using CupHeroesClone.Gameplay.User;
 using CupHeroesClone.UI.Basic;
@@ -27,7 +28,7 @@ namespace CupHeroesClone.UI.Components
         
         #region Events
         
-        public readonly UnityEvent<UpgradeTarget, float> OnUpgradeBuy = new UnityEvent<UpgradeTarget, float>();
+        public readonly UnityEvent OnPurchaseUpgrade = new UnityEvent();
         
         #endregion
         
@@ -37,11 +38,16 @@ namespace CupHeroesClone.UI.Components
         public void Init(float value, float cost)
         {
             base.Init();
+            buyUpgradeButton.Init();
+            
             upgradeValue = value;
+            UpdateNumber(upgradeValue);
+            
             upgradeCost = cost;
+            buyUpgradeButton.SetText(Util.StringFromNumber(upgradeCost));
             
             SetTextColor(Color.lawnGreen);
-            if (upgradeCost <= Player.Instance.MoneyBalance)
+            if (upgradeCost > Player.Instance.MoneyBalance)
             {
                 buyUpgradeButton.SetTextColor(Color.red);
                 buyUpgradeButton.Deactivate();
@@ -54,6 +60,9 @@ namespace CupHeroesClone.UI.Components
         public void Clear()
         {
             buyUpgradeButton?.OnClick.RemoveAllListeners();
+            OnPurchaseUpgrade.RemoveAllListeners();
+            upgradeValue = 0;
+            upgradeCost = 0;
         }
         
         #endregion
@@ -63,7 +72,8 @@ namespace CupHeroesClone.UI.Components
 
         private void HandleBuyUpgradeClick()
         {
-            OnUpgradeBuy.Invoke(upgradeTarget, upgradeValue);
+            // OnPurchaseUpgrade.Invoke(upgradeTarget, upgradeValue, upgradeCost);
+            OnPurchaseUpgrade.Invoke();
         }
         
         #endregion

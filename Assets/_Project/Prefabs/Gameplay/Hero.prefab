@@ -394,7 +394,7 @@ MonoBehaviour:
   maxHealth: 100
   currentHealth: 100
   attackDamage: 10
-  attackSpeed: 2
+  attackSpeed: 1.5
   healthBarOrigin: {fileID: 5873734629606506547}
   projectileTargetOrigin: {fileID: 1391994781441971096}
   damageTextSpawnOrigin: {fileID: 2236232996472064681}

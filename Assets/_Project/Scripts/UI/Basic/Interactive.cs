@@ -126,38 +126,26 @@ namespace CupHeroesClone.UI.Basic
 
         protected virtual void AnimateClick()
         {
-#if UNITY_EDITOR
-            Debug.LogWarning("Interactive.AnimateClick() is invoked");
-#endif
+            //
         }
 
         protected virtual void AnimateEnter()
         {
-#if UNITY_EDITOR
-            Debug.LogWarning("Interactive.AnimateEnter() is invoked");
-#endif
+            //
         }
 
         protected virtual void AnimateLeave()
         {
-#if UNITY_EDITOR
-            Debug.LogWarning("Interactive.AnimateLeave() is invoked");
-#endif
+            //
         }
 
         protected virtual void AnimatePress()
         {
-#if UNITY_EDITOR
-            Debug.LogWarning("Interactive.AnimatePress() is invoked");
-#endif
             AnimationManager.Instance.PlayPressOn(buttonComponent.gameObject.transform);
         }
 
         protected virtual void AnimateRelease()
         {
-#if UNITY_EDITOR
-            Debug.LogWarning("Interactive.AnimateRelease() is invoked");
-#endif
             AnimationManager.Instance.PlayReleaseOn(buttonComponent.gameObject.transform);
         }
 
