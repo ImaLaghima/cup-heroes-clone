@@ -996,7 +996,7 @@ Transform:
   m_GameObject: {fileID: 1449254150}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.45, y: 1.61, z: 0}
+  m_LocalPosition: {x: 3.34, y: 1.61, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1173,7 +1173,7 @@ MonoBehaviour:
   firstWaveSize: 2
   increaseEachWaveBy: 1
   moneyPerKill: 2
-  runForSeconds: 3
+  runForSeconds: 2
 --- !u!4 &1639726794
 Transform:
   m_ObjectHideFlags: 0
@@ -1227,6 +1227,51 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1821073597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1821073599}
+  - component: {fileID: 1821073598}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1821073598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821073597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f4ca6f489eb9ba4fab11235d149e997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CupHeroesClone.AudioManager
+  backgroundMusic: []
+--- !u!4 &1821073599
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1821073597}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1942995053
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,7 +1429,7 @@ Transform:
   m_GameObject: {fileID: 2005257760}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.4, y: 2.39, z: 0}
+  m_LocalPosition: {x: 3.29, y: 2.39, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1415,7 +1460,7 @@ Transform:
   m_GameObject: {fileID: 2112550960}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.5400002, y: 0.8, z: 0}
+  m_LocalPosition: {x: 3.43, y: 0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1432,4 +1477,5 @@ SceneRoots:
   - {fileID: 1639726794}
   - {fileID: 255344287}
   - {fileID: 2004467317}
+  - {fileID: 1821073599}
   - {fileID: 746888791}

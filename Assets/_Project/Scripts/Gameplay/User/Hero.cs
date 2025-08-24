@@ -11,9 +11,15 @@ namespace CupHeroesClone.Gameplay.User
 {
     public class Hero : CombatUnit
     {
+        private static readonly int StartRunT = Animator.StringToHash("startRun_t");
+        private static readonly int StartCombatT = Animator.StringToHash("startCombat_t");
+        private static readonly int HasTargetT = Animator.StringToHash("hasTarget_t");
+        private static readonly int StopCombatT = Animator.StringToHash("stopCombat_t");
+
         #region  Fields
 
         [Header("Hero")]
+        [SerializeField] protected Animator animator;
         [SerializeField] protected GameObject projectilePrefab;
         [SerializeField] protected GameObject projectileSpawnPoint;
         [SerializeField] private LayerMask attackTargetLayers;
@@ -23,6 +29,8 @@ namespace CupHeroesClone.Gameplay.User
         private HeroState _state;
         private Queue<CombatUnit> _targetsOfAttack = new Queue<CombatUnit>();
         private CombatUnit _currentTarget = null;
+        
+        private Coroutine _fightingCoroutine;
 
         #endregion
         
@@ -48,24 +56,29 @@ namespace CupHeroesClone.Gameplay.User
         {
             SetupHealthBar();
             
+            animator.SetTrigger(StartCombatT);
+            
             _state = HeroState.Fight;
             _currentTarget = null;
-            StartCoroutine(Fighting());
+            _fightingCoroutine = StartCoroutine(Fighting());
         }
         
         public void StopCombat()
         {
-            StopCoroutine(Fighting());
+            StopCoroutine(_fightingCoroutine);
             WithdrawProjectiles();
             _targetsOfAttack.Clear();
             ReleaseHealthBar();
             
+            animator.ResetTrigger(HasTargetT);
+            animator.SetTrigger(StopCombatT);
             _state = HeroState.Idle;
         }
         
         public void RunForward()
         {
             _state = HeroState.Run;
+            animator.SetTrigger(StartRunT);
         }
         
         #endregion
@@ -117,6 +130,7 @@ namespace CupHeroesClone.Gameplay.User
                 {
                     _currentTarget = _targetsOfAttack.Dequeue();
                     _currentTarget.OnUnitDeath.AddListener(() => _currentTarget = null);
+                    animator.SetTrigger(HasTargetT);
                 }
                 
                 GameObject projectileObj = _projectilePool.Borrow();

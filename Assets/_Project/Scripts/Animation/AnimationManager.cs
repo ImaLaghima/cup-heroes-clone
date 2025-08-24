@@ -130,11 +130,6 @@ namespace CupHeroesClone.Animation
             Vector3 originalPosition = targetTransform.position;
             Vector3 lungePosition = originalPosition + targetTransform.right * -lungeDistance;
             
-            // Debug.Log("original = " + originalPosition);
-            // Debug.Log("lunge = " + lungePosition);
-            
-            // TODO: wif lunge animation - enemies slowly moves forward
-            
             Sequence lungeSequence = DOTween.Sequence();
             lungeSequence
                 .Append(targetTransform.DOMove(lungePosition, lungeDuration / 2)

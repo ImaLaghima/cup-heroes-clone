@@ -59,6 +59,7 @@ namespace CupHeroesClone.Gameplay.Enemy
         public void ActivateAt(Transform placeTransform)
         {
             base.Init();
+            transform.localScale = new Vector3(-1, 1, 1);
             transform.position = placeTransform.position;
             gameObject.SetActive(true);
         }
@@ -82,12 +83,11 @@ namespace CupHeroesClone.Gameplay.Enemy
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            // Debug.Log("Enemy collide with " + other.name + "; Tag = " + other.tag);
-            
             if (Physics2D.IsTouching(attackCollider, other) && other.CompareTag("Hero"))
             {
                 _targetOfAttack = other.GetComponentInParent<CombatUnit>();
-                StartFighting();
+                if (State != EnemyState.Fight)
+                    StartFighting();
             }
         }
 
