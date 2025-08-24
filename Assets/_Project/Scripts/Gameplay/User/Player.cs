@@ -88,7 +88,7 @@ namespace CupHeroesClone.Gameplay.User
         public void Restart()
         {
             _hero.RestoreDefault();
-            MoneyBalance = 50;
+            MoneyBalance = 10;
             
             _hero.OnUnitDeath.AddListener(() =>
             {
