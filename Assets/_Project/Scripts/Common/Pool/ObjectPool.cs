@@ -38,6 +38,7 @@ namespace CupHeroesClone.Common.Pool
 
         public void Return(GameObject instance)
         {
+            instance.SetActive(false);
             _pool.Enqueue(instance);
         }
         

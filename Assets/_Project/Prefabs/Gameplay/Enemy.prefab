@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 571912171169194864}
   - component: {fileID: 8035015237068079251}
   - component: {fileID: 1397661436650030100}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Body
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ MonoBehaviour:
   rigidbody2D: {fileID: 4973805807627806922}
   bodyCollider: {fileID: 1397661436650030100}
   attackCollider: {fileID: 7872481870952444057}
-  moveVelocity: 1
+  moveVelocity: 1.5
   moveDirection: 1
 --- !u!50 &4973805807627806922
 Rigidbody2D:

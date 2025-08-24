@@ -17,7 +17,7 @@ namespace CupHeroesClone.Gameplay.Enemy
         [SerializeField] protected MoveDirection moveDirection = MoveDirection.Left;
         
         private Vector2 _effectiveMoveDirection;
-        private CombatUnit _attackTarget;
+        private CombatUnit _targetOfAttack;
         
         protected EnemyState State;
 
@@ -61,12 +61,6 @@ namespace CupHeroesClone.Gameplay.Enemy
             transform.position = placeTransform.position;
             gameObject.SetActive(true);
         }
-
-        public void Clear()
-        {
-            OnHealthChange.RemoveAllListeners();
-            OnUnitDeath.RemoveAllListeners();
-        }
         
         #endregion
         
@@ -87,11 +81,11 @@ namespace CupHeroesClone.Gameplay.Enemy
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            Debug.Log("Enemy collide with " + other.name + "; Tag = " + other.tag);
+            // Debug.Log("Enemy collide with " + other.name + "; Tag = " + other.tag);
             
             if (Physics2D.IsTouching(attackCollider, other) && other.CompareTag("Hero"))
             {
-                _attackTarget = other.GetComponentInParent<CombatUnit>();
+                _targetOfAttack = other.GetComponentInParent<CombatUnit>();
                 StartFighting();
             }
         }
@@ -105,11 +99,9 @@ namespace CupHeroesClone.Gameplay.Enemy
         {
             while (true)
             {
+                _targetOfAttack.ReceiveDamage(attackDamage);
                 yield return new WaitForSeconds(1f / attackSpeed);
-                _attackTarget.ReceiveDamage(attackDamage);
             }
-            
-            yield return null;
         }
         
         #endregion

@@ -64,6 +64,12 @@ namespace CupHeroesClone.Gameplay.User
         {
             GameObject heroObj = Instantiate(heroPrefab, heroSpawnPoint.transform);
             _hero = heroObj.GetComponent<Hero>();
+            _hero.OnUnitDeath.AddListener(() =>
+            {
+                GameManager.Instance.CountPlayerDeath();
+                _hero.OnUnitDeath.RemoveAllListeners();
+            });
+            _hero.Init();
         }
 
         public void StartCombat()

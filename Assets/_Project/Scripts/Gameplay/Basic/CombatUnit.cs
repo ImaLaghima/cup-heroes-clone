@@ -31,6 +31,8 @@ namespace CupHeroesClone.Gameplay.Basic
         
         
         #region Properties
+        
+        public GameObject ProjectileTargetOrigin => projectileTargetOrigin;
 
         public float Health
         {
@@ -77,6 +79,12 @@ namespace CupHeroesClone.Gameplay.Basic
         public void ReceiveDamage(float amount)
         {
             TakeDamage(amount);
+        }
+        
+        public virtual void Clear()
+        {
+            OnHealthChange.RemoveAllListeners();
+            OnUnitDeath.RemoveAllListeners();
         }
         
         #endregion
