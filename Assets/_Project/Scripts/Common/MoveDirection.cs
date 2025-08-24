@@ -3,11 +3,9 @@
 
 namespace CupHeroesClone.Common
 {
-    public enum Direction : byte
+    public enum MoveDirection : byte
     {
-        Up,
-        Down,
-        Left,
         Right,
+        Left,
     }
 }
