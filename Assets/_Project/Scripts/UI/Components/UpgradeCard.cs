@@ -18,7 +18,7 @@ namespace CupHeroesClone.UI.Components
         [Header("Upgrade Card")]
         [SerializeField] protected Image icon;
         [SerializeField] protected UpgradeTarget upgradeTarget;
-        [SerializeField] protected CustomButton buyUpgradeButton;
+        [SerializeField] protected CustomButton purchaseUpgradeButton;
         
         protected float upgradeValue;
         protected float upgradeCost;
@@ -38,31 +38,38 @@ namespace CupHeroesClone.UI.Components
         public void Init(float value, float cost)
         {
             base.Init();
-            buyUpgradeButton.Init();
+            purchaseUpgradeButton.Init();
             
             upgradeValue = value;
+            SetTextColor(Color.lawnGreen);
             UpdateNumber(upgradeValue);
             
             upgradeCost = cost;
-            buyUpgradeButton.SetText(Util.StringFromNumber(upgradeCost));
+            purchaseUpgradeButton.SetText(Util.StringFromNumber(upgradeCost));
             
-            SetTextColor(Color.lawnGreen);
             if (upgradeCost > Player.Instance.MoneyBalance)
             {
-                buyUpgradeButton.SetTextColor(Color.red);
-                buyUpgradeButton.Deactivate();
+                purchaseUpgradeButton.SetTextColor(Color.red);
+                purchaseUpgradeButton.Deactivate();
                 return;
             }
             
-            buyUpgradeButton.OnClick.AddListener(HandleBuyUpgradeClick);
+            purchaseUpgradeButton.OnClick.AddListener(HandleBuyUpgradeClick);
         }
 
         public void Clear()
         {
-            buyUpgradeButton?.OnClick.RemoveAllListeners();
+            purchaseUpgradeButton.Activate();
+            purchaseUpgradeButton.SetTextColor(Color.white);
+            purchaseUpgradeButton?.OnClick.RemoveAllListeners();
             OnPurchaseUpgrade.RemoveAllListeners();
             upgradeValue = 0;
             upgradeCost = 0;
+        }
+        
+        public override void UpdateNumber(float value)
+        {
+            SetText("+" + Util.StringFromNumber(value));
         }
         
         #endregion

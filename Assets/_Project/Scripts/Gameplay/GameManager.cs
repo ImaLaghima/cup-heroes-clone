@@ -1,7 +1,9 @@
 // Ivan Postarnak
 // https://github.com/IvanPostarnak/cup-heroes-clone
 
+using System;
 using System.Collections;
+using CupHeroesClone.Common;
 using CupHeroesClone.Gameplay.Basic;
 using CupHeroesClone.Gameplay.User;
 using CupHeroesClone.Gameplay.Enemy;
@@ -118,7 +120,10 @@ namespace CupHeroesClone.Gameplay
         {
             Player.Instance.StopCombat();
             enemyFactory.WithdrawEnemies();
-            UIManager.Instance.ShowGameOver(_waveCounter - 1);
+            
+            int wavesSurvived = Util.Clamp(_waveCounter - 1, 0, Int32.MaxValue);
+            UIManager.Instance.ShowGameOver(wavesSurvived);
+            
             _waveCounter = 0;
             _enemiesInWave = 0;
             _enemiesKillCounter = 0;

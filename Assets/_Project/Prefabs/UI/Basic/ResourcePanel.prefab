@@ -129,7 +129,7 @@ MonoBehaviour:
   backgroundImage: {fileID: 1859918656374042734}
   textElement: {fileID: 5078916201564423075}
   minValue: 0
-  maxValue: 4294967295
+  maxValue: 4.2949673e+9
   iconImage: {fileID: 7534675368751802820}
 --- !u!1 &6949601302159817943
 GameObject:
@@ -240,8 +240,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 73.929016, y: -1}
-  m_SizeDelta: {x: -267.6362, y: -64.0094}
+  m_AnchoredPosition: {x: 91.92584, y: -1}
+  m_SizeDelta: {x: -311.7845, y: -64.0094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7725751000020474634
 CanvasRenderer:
@@ -305,7 +305,7 @@ MonoBehaviour:
   m_fontSizeMin: 8
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0

@@ -100,12 +100,12 @@ namespace CupHeroesClone.Gameplay.User
         public void StartCombat()
         {
             background.StopScrolling();
-            
             _hero.StartCombat();
         }
 
         public void StopCombat()
         {
+            background.StopScrolling();
             _hero.StopCombat();
         }
 

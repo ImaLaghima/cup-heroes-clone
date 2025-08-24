@@ -1,6 +1,8 @@
 // Ivan Postarnak
 // https://github.com/IvanPostarnak/cup-heroes-clone
 
+using CupHeroesClone.Gameplay;
+using CupHeroesClone.UI.Basic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,8 +13,12 @@ namespace CupHeroesClone.UI
     [DisallowMultipleComponent]
     public class PauseOverlay : MonoBehaviour
     {
+        #region Fields
+        
         [SerializeField] private Button buttonComponent;
         [SerializeField] private TextMeshProUGUI textComponent;
+        
+        #endregion
 
         public readonly UnityEvent OnGameContinue = new UnityEvent();
         

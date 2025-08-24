@@ -1,10 +1,14 @@
 fileFormatVersion: 2
-guid: 93f9b1b79d2dc1d4cad1c4dc54c49511
+guid: 05f2381e0d0c544c2894d672bba229c1
+AssetOrigin:
+  serializedVersion: 1
+  productId: 265651
+  packageName: GUI - Casual Fantasy
+  packageVersion: 2.0.3
+  assetPath: Assets/_Project/Art/UI/Icon_Skull01.Png
+  uploadId: 714409
 TextureImporter:
-  internalIDToNameTable:
-  - first:
-      213: -6185642684561082190
-    second: NumberPanel_Outline_0
+  internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -47,16 +51,16 @@ TextureImporter:
   lightmap: 0
   compressionQuality: 50
   spriteMode: 1
-  spriteExtrude: 2
+  spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 8, y: 8, z: 8, w: 8}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
-  spriteTessellationDetail: 0.5
+  spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
@@ -84,6 +88,19 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
     buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -97,7 +114,7 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 4
-    buildTarget: WebGL
+    buildTarget: Server
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -111,65 +128,13 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: NumberPanel_Outline_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 512
-        height: 512
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2b83e3750ce282aa0800000000000000
-      internalID: -6185642684561082190
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    outline:
-    - - {x: 246, y: -254}
-      - {x: 256, y: -240}
-      - {x: 256, y: 237}
-      - {x: 252, y: 245}
-      - {x: 242, y: 254}
-      - {x: 238, y: 256}
-      - {x: -237, y: 256}
-      - {x: -245, y: 252}
-      - {x: -254, y: 242}
-      - {x: -256, y: 238}
-      - {x: -256, y: -237}
-      - {x: -252, y: -245}
-      - {x: -242, y: -254}
-      - {x: -238, y: -256}
-      - {x: 239, y: -256}
+    sprites: []
+    outline: []
     customData: 
-    physicsShape:
-    - - {x: 246, y: -254}
-      - {x: 256, y: -240}
-      - {x: 256, y: 237}
-      - {x: 252, y: 245}
-      - {x: 242, y: 254}
-      - {x: 238, y: 256}
-      - {x: -237, y: 256}
-      - {x: -245, y: 252}
-      - {x: -254, y: 242}
-      - {x: -256, y: 238}
-      - {x: -256, y: -237}
-      - {x: -252, y: -245}
-      - {x: -242, y: -254}
-      - {x: -238, y: -256}
-      - {x: 239, y: -256}
+    physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 1537655665
+    internalID: 0
     vertices: []
     indices: 
     edges: []
@@ -177,8 +142,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      NumberPanel_Outline_0: -6185642684561082190
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

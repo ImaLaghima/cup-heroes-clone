@@ -621,7 +621,7 @@ Transform:
   m_GameObject: {fileID: 949764869}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.607, y: 0, z: 0}
+  m_LocalPosition: {x: 5.6159973, y: -0.00000026, z: 0}
   m_LocalScale: {x: 0.52, y: 0.52, z: 0.52}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -858,7 +858,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CupHeroesClone.UI.Components.InfiniteBackground
   leftPart: {fileID: 974695573}
   rightPart: {fileID: 949764870}
-  speed: 3
+  speed: 7
 --- !u!1 &1449254150
 GameObject:
   m_ObjectHideFlags: 0

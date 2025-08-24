@@ -10,9 +10,16 @@ namespace CupHeroesClone.UI.Basic
     {
         // possible notification badge implementation
 
+        public virtual void Activate()
+        {
+            isInteractionEnabled = true;
+        }
+        
         public virtual void Deactivate()
         {
             isInteractionEnabled = false;
         }
+        
+        
     }
 }
