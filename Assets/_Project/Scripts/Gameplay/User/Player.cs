@@ -88,6 +88,10 @@ namespace CupHeroesClone.Gameplay.User
         public void Restart()
         {
             _hero.RestoreDefault();
+            OnMaxHealthChange.Invoke(_hero.MaxHealth);
+            OnAttackDamageChange.Invoke(_hero.AttackDamage);
+            OnAttackSpeedChange.Invoke(_hero.AttackSpeed);
+            
             MoneyBalance = 10;
             
             _hero.OnUnitDeath.AddListener(() =>
