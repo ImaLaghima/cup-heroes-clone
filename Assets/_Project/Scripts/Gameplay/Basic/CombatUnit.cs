@@ -118,10 +118,10 @@ namespace CupHeroesClone.Gameplay.Basic
         
         public virtual void Clear()
         {
-            OnHealthChange.RemoveAllListeners();
-            OnUnitDeath.RemoveAllListeners();
             ReleaseHealthBar();
             RestoreDefault();
+            OnHealthChange.RemoveAllListeners();
+            OnUnitDeath.RemoveAllListeners();
         }
 
         public virtual void RestoreDefault()

@@ -102,6 +102,7 @@ namespace CupHeroesClone.Animation
             Action onComplete = null
         )
         {
+            // TODO: fix overlapping of animations - bar's fill flicks on high AttackSpeed
             Tween tween = DOTween.To(
                 () => startValue, 
                 value => 
@@ -132,7 +133,7 @@ namespace CupHeroesClone.Animation
             // Debug.Log("original = " + originalPosition);
             // Debug.Log("lunge = " + lungePosition);
             
-            // TODO: wif lunge animation
+            // TODO: wif lunge animation - enemies slowly moves forward
             
             Sequence lungeSequence = DOTween.Sequence();
             lungeSequence

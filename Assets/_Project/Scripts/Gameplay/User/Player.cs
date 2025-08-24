@@ -3,6 +3,7 @@
 
 using CupHeroesClone.Common;
 using CupHeroesClone.Gameplay.Basic;
+using CupHeroesClone.UI.Components;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -20,6 +21,8 @@ namespace CupHeroesClone.Gameplay.User
         [Space]
         [SerializeField] GameObject heroPrefab;
         [SerializeField] GameObject heroSpawnPoint;
+        [Space]
+        [SerializeField] private InfiniteBackground background;
         
         private Hero _hero;
         
@@ -70,6 +73,8 @@ namespace CupHeroesClone.Gameplay.User
 
         public void Init()
         {
+            background.Init();
+            
             GameObject heroObj = Instantiate(heroPrefab, heroSpawnPoint.transform);
             _hero = heroObj.GetComponent<Hero>();
             _hero.OnUnitDeath.AddListener(() =>
@@ -94,6 +99,8 @@ namespace CupHeroesClone.Gameplay.User
 
         public void StartCombat()
         {
+            background.StopScrolling();
+            
             _hero.StartCombat();
         }
 
@@ -104,6 +111,7 @@ namespace CupHeroesClone.Gameplay.User
 
         public void RunForward()
         {
+            background.StartScrolling();
             _hero.RunForward();
         }
 

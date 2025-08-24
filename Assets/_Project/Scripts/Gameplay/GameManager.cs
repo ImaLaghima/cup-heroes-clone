@@ -1,6 +1,7 @@
 // Ivan Postarnak
 // https://github.com/IvanPostarnak/cup-heroes-clone
 
+using System.Collections;
 using CupHeroesClone.Gameplay.Basic;
 using CupHeroesClone.Gameplay.User;
 using CupHeroesClone.Gameplay.Enemy;
@@ -21,6 +22,8 @@ namespace CupHeroesClone.Gameplay
         [SerializeField] private int firstWaveSize = 2;
         [SerializeField] private int increaseEachWaveBy = 2;
         [SerializeField] private int moneyPerKill = 2;
+        [Space]
+        [SerializeField] private float runForSeconds = 3f;
 
         private int _waveCounter = 0;
         private int _enemiesInWave = 0;
@@ -55,8 +58,7 @@ namespace CupHeroesClone.Gameplay
 
         public void StartNextWave()
         {
-            // run
-            StartCombat();
+            StartCoroutine(StartNextWaveRoutine());
         }
         
         public void SetGamePause(bool value)
@@ -130,6 +132,18 @@ namespace CupHeroesClone.Gameplay
                 return;
             }
             Instance = this;
+        }
+        
+        #endregion
+        
+        
+        #region Coroutines
+
+        private IEnumerator StartNextWaveRoutine()
+        {
+            Player.Instance.RunForward();
+            yield return new WaitForSeconds(runForSeconds);
+            StartCombat();
         }
         
         #endregion

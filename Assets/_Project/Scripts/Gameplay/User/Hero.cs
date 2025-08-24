@@ -41,7 +41,7 @@ namespace CupHeroesClone.Gameplay.User
             MinHealth = 0;
             Health = MaxHealth;
             AttackDamage = 10f;
-            AttackSpeed = 1f;
+            AttackSpeed = 1.5f;
         }
 
         public void StartCombat()

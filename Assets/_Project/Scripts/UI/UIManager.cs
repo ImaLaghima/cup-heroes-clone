@@ -110,6 +110,7 @@ namespace CupHeroesClone.UI
             {
                 _gameOverScreen.Clear();
                 _gameOverScreen.gameObject.SetActive(false);
+                _rewardOverlay.Clear();
                 _rewardOverlay.gameObject.SetActive(false);
                 Player.Instance.Restart();
                 GameManager.Instance.StartNewGame();

@@ -1,6 +1,7 @@
 // Ivan Postarnak
 // https://github.com/IvanPostarnak/cup-heroes-clone
 
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -43,10 +44,16 @@ namespace CupHeroesClone.Gameplay.Basic
             if (_timeSinceStart >= fallbackLifetime)
                 EndProjectile();
             
-            if (_target == null)
+            try
+            {
+                _endPosition = _target.transform.position;
+            }
+            catch
+            {
                 EndProjectile();
+                return;
+            }
             
-            _endPosition = _target.transform.position;
             Vector3 currentPosition = transform.position;
             Vector2 toEnd2D = new Vector2(_endPosition.x - currentPosition.x, _endPosition.y - currentPosition.y);
             float planarDistance = toEnd2D.magnitude;
@@ -78,6 +85,7 @@ namespace CupHeroesClone.Gameplay.Basic
             _target = target;
             transform.position = placeTransform.position;
             _endPosition = _target.transform.position;
+            _timeSinceStart = 0;
             _isActive = true;
             gameObject.SetActive(true);
         }
